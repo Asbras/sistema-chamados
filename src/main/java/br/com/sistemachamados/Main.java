@@ -1,0 +1,20 @@
+package br.com.sistemachamados;
+
+public class Main {
+    public static void main(String[] args) {
+        System.out.println("--------------------------");
+        System.out.println("Sistema de Chamados de TI");
+        System.out.println("--------------------------");
+        Chamado chamado = new Chamado("Computador não liga", "Computador do setor financeiro não inicia", Prioridade.ALTA);
+        System.out.println("Título: " + chamado.getTitulo());
+        System.out.println("Prioridade: " + chamado.getPrioridade());
+        System.out.println("Status: " + chamado.getStatus());
+        chamado.iniciarAtendimento();
+        System.out.println("Status: " + chamado.getStatus());
+        try {
+            chamado.iniciarAtendimento();
+        } catch (IllegalStateException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+}
