@@ -7,6 +7,11 @@ public class Chamado {
     private Status status;
 
     public Chamado(String titulo, String descricao, Prioridade prioridade) {
+        if (titulo == null || titulo.isBlank() ) {
+            throw new IllegalArgumentException(
+                    "O título do chamado não pode estar vazio"
+            );
+        }
         this.titulo = titulo;
         this.descricao = descricao;
         this.status = Status.ABERTO;
