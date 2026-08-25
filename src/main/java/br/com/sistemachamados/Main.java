@@ -5,7 +5,8 @@ public class Main {
         System.out.println("--------------------------");
         System.out.println("Sistema de Chamados de TI");
         System.out.println("--------------------------");
-        Chamado chamado = new Chamado("Computador não liga", "Computador do setor financeiro não inicia", Prioridade.ALTA);
+        Usuario usuario = new Usuario("Jonas", "email@gmail.com", "Financeiro");
+        Chamado chamado = new Chamado(usuario, "Computador não liga", "Computador do setor financeiro não inicia", Prioridade.ALTA);
         System.out.println("Título: " + chamado.getTitulo());
         System.out.println("Prioridade: " + chamado.getPrioridade());
         System.out.println("Status: " + chamado.getStatus());
@@ -30,5 +31,6 @@ public class Main {
         } catch (IllegalStateException e) {
             System.out.println(e.getMessage());
         }
+        System.out.println("Solicitante: " + chamado.getSolicitante().getNome());
     }
 }

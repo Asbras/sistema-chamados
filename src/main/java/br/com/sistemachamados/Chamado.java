@@ -5,8 +5,14 @@ public class Chamado {
     private String descricao;
     private Prioridade prioridade;
     private Status status;
+    private Usuario solicitante;
 
-    public Chamado(String titulo, String descricao, Prioridade prioridade) {
+    public Chamado(Usuario solicitante, String titulo, String descricao, Prioridade prioridade) {
+        if (solicitante == null) {
+            throw new IllegalArgumentException(
+                    "Deve existir um solicitante válido"
+            );
+        }
         if (titulo == null || titulo.isBlank() ) {
             throw new IllegalArgumentException(
                     "O título do chamado não pode estar vazio"
@@ -22,6 +28,7 @@ public class Chamado {
                     "A prioridade deve ser informada"
             );
         }
+        this.solicitante = solicitante;
         this.titulo = titulo;
         this.descricao = descricao;
         this.status = Status.ABERTO;
@@ -51,6 +58,10 @@ public class Chamado {
 
     public Status getStatus() {
         return status;
+    }
+
+    public Usuario getSolicitante() {
+        return solicitante;
     }
 
     public void iniciarAtendimento() {
