@@ -12,6 +12,16 @@ public class Chamado {
                     "O título do chamado não pode estar vazio"
             );
         }
+        if (descricao == null || descricao.isBlank() ) {
+            throw new IllegalArgumentException(
+                    "A descrição do chamado não pode estar vazia"
+            );
+        }
+        if (prioridade == null) {
+            throw new IllegalArgumentException(
+                    "A prioridade deve ser informada"
+            );
+        }
         this.titulo = titulo;
         this.descricao = descricao;
         this.status = Status.ABERTO;
