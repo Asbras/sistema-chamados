@@ -55,4 +55,13 @@ public class Chamado {
         }
         status = Status.RESOLVIDO;
     }
+
+    public void fechar() {
+        if (status != Status.RESOLVIDO) {
+            throw new IllegalStateException (
+                    "O chamado só pode ser fechado quando estiver em RESOLVIDO"
+            );
+        }
+        status = Status.FECHADO;
+    }
 }

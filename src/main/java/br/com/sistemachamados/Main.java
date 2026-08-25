@@ -23,5 +23,12 @@ public class Main {
         } catch (IllegalStateException e) {
             System.out.println(e.getMessage());
         }
+        chamado.fechar();
+        System.out.println("Status: " + chamado.getStatus());
+        try {
+            chamado.fechar();
+        } catch (IllegalStateException e) {
+            System.out.println(e.getMessage());
+        }
     }
 }
