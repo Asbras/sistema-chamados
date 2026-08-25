@@ -16,5 +16,12 @@ public class Main {
         } catch (IllegalStateException e) {
             System.out.println(e.getMessage());
         }
+        chamado.resolver();
+        System.out.println("Status: " + chamado.getStatus());
+        try {
+            chamado.resolver();
+        } catch (IllegalStateException e) {
+            System.out.println(e.getMessage());
+        }
     }
 }

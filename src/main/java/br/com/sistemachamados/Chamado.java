@@ -46,4 +46,13 @@ public class Chamado {
         }
         status = Status.EM_ANDAMENTO;
     }
+
+    public void resolver() {
+        if (status != Status.EM_ANDAMENTO) {
+            throw new IllegalStateException(
+                    "O chamado só pode ser resolvido quando está EM_ANDAMENTO"
+            );
+        }
+        status = Status.RESOLVIDO;
+    }
 }
