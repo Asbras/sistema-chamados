@@ -84,6 +84,21 @@ public class Chamado {
         status = Status.EM_ANDAMENTO;
     }
 
+    public void devolverParaFila(Tecnico tecnico){
+        if (status != Status.EM_ANDAMENTO) {
+            throw new IllegalStateException(
+                    "Chamados só podem retornar a fila se estiverem EM_ANDAMENTO"
+            );
+        }
+        if (tecnico != tecnicoResponsavel) {
+            throw new IllegalArgumentException(
+                    "Somente o técnico responsável pode executar essa função"
+            );
+        }
+        status = Status.ABERTO;
+        tecnicoResponsavel = null;
+    }
+
     public void resolver(Tecnico tecnico) {
         if (status != Status.EM_ANDAMENTO) {
             throw new IllegalStateException(
