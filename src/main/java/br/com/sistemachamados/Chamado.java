@@ -41,17 +41,11 @@ public class Chamado {
         return titulo;
     }
 
-    public void setTitulo(String titulo) {
-        this.titulo = titulo;
-    }
 
     public String getDescricao() {
         return descricao;
     }
 
-    public void setDescricao(String descricao) {
-        this.descricao = descricao;
-    }
 
     public Prioridade getPrioridade() {
         return prioridade;
@@ -69,6 +63,23 @@ public class Chamado {
         return tecnicoResponsavel;
     }
 
+    public void corrigirTitulo(String titulo) {
+        if (titulo == null || titulo.isBlank()) {
+            throw new IllegalArgumentException(
+                    "O título não pode ficar vazio"
+            );
+        }
+        this.titulo = titulo;
+    }
+
+    public void corrigirDescricao(String descricao) {
+        if (descricao == null || descricao.isBlank()) {
+            throw new IllegalArgumentException(
+                    "A descrição não pode ficar vazia"
+            );
+        }
+        this.descricao = descricao;
+    }
     public void iniciarAtendimento(Tecnico tecnico) {
         if (tecnico == null) {
             throw new IllegalArgumentException(
