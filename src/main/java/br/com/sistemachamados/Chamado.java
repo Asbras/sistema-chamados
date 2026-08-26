@@ -6,6 +6,7 @@ public class Chamado {
     private Prioridade prioridade;
     private Status status;
     private Usuario solicitante;
+    private Tecnico tecnicoResponsavel;
 
     public Chamado(Usuario solicitante, String titulo, String descricao, Prioridade prioridade) {
         if (solicitante == null) {
@@ -64,12 +65,22 @@ public class Chamado {
         return solicitante;
     }
 
-    public void iniciarAtendimento() {
+    public Tecnico getTecnicoResponsavel() {
+        return tecnicoResponsavel;
+    }
+
+    public void iniciarAtendimento(Tecnico tecnico) {
+        if (tecnico == null) {
+            throw new IllegalArgumentException(
+                    "O chamado só pode ser iniciado quando há um Tecnico responsável"
+            );
+        }
         if (status != Status.ABERTO) {
             throw new IllegalStateException(
                     "O chamado só pode ser iniciado quando está ABERTO"
             );
         }
+        this.tecnicoResponsavel = tecnico;
         status = Status.EM_ANDAMENTO;
     }
 
