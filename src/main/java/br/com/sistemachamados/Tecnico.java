@@ -16,4 +16,8 @@ public class Tecnico extends Usuario {
     public void fechar(Chamado chamado) {
         chamado.fechar(this);
     }
+
+    public void devolverParaFila(Chamado chamado) {
+        chamado.devolverParaFila(this);
+    }
 }
