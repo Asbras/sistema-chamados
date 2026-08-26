@@ -14,12 +14,12 @@ public class Chamado {
                     "Deve existir um solicitante válido"
             );
         }
-        if (titulo == null || titulo.isBlank() ) {
+        if (titulo == null || titulo.isBlank()) {
             throw new IllegalArgumentException(
                     "O título do chamado não pode estar vazio"
             );
         }
-        if (descricao == null || descricao.isBlank() ) {
+        if (descricao == null || descricao.isBlank()) {
             throw new IllegalArgumentException(
                     "A descrição do chamado não pode estar vazia"
             );
@@ -84,19 +84,29 @@ public class Chamado {
         status = Status.EM_ANDAMENTO;
     }
 
-    public void resolver() {
+    public void resolver(Tecnico tecnico) {
         if (status != Status.EM_ANDAMENTO) {
             throw new IllegalStateException(
                     "O chamado só pode ser resolvido quando está EM_ANDAMENTO"
             );
         }
+        if (tecnico != tecnicoResponsavel) {
+            throw new IllegalArgumentException(
+                    "Somente o técnico responsável pode executar essa função"
+            );
+        }
         status = Status.RESOLVIDO;
     }
 
-    public void fechar() {
+    public void fechar(Tecnico tecnico) {
         if (status != Status.RESOLVIDO) {
-            throw new IllegalStateException (
+            throw new IllegalStateException(
                     "O chamado só pode ser fechado quando estiver em RESOLVIDO"
+            );
+        }
+        if (tecnico != tecnicoResponsavel) {
+            throw new IllegalArgumentException(
+                    "Somente o técnico responsável pode executar essa função"
             );
         }
         status = Status.FECHADO;

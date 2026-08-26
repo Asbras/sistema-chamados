@@ -5,7 +5,15 @@ public class Tecnico extends Usuario {
         super(nome, email, departamento);
     }
 
-    public void iniciarAtendimento(Chamado chamado){
+    public void iniciarAtendimento(Chamado chamado) {
         chamado.iniciarAtendimento(this);
+    }
+
+    public void resolver(Chamado chamado) {
+        chamado.resolver(this);
+    }
+
+    public void fechar(Chamado chamado) {
+        chamado.fechar(this);
     }
 }
