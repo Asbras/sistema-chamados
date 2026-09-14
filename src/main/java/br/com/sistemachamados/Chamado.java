@@ -1,5 +1,8 @@
 package br.com.sistemachamados;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Chamado {
     private String titulo;
     private String descricao;
@@ -7,6 +10,7 @@ public class Chamado {
     private Status status;
     private Usuario solicitante;
     private Tecnico tecnicoResponsavel;
+    private final List<RegistroHistorico> historico;
 
     public Chamado(Usuario solicitante, String titulo, String descricao, Prioridade prioridade) {
         if (solicitante == null) {
@@ -34,6 +38,7 @@ public class Chamado {
         this.descricao = descricao;
         this.status = Status.ABERTO;
         this.prioridade = prioridade;
+        this.historico = new ArrayList<>();
     }
 
 
@@ -63,6 +68,10 @@ public class Chamado {
         return tecnicoResponsavel;
     }
 
+    public List<RegistroHistorico> getHistorico() {
+        return List.copyOf(historico);
+    }
+
     public void corrigirTitulo(String titulo) {
         if (titulo == null || titulo.isBlank()) {
             throw new IllegalArgumentException(
@@ -70,6 +79,7 @@ public class Chamado {
             );
         }
         this.titulo = titulo;
+        registrarHistorico(AcaoChamado.CORRECAO_TITULO, solicitante);
     }
 
     public void corrigirDescricao(String descricao) {
@@ -79,6 +89,7 @@ public class Chamado {
             );
         }
         this.descricao = descricao;
+        registrarHistorico(AcaoChamado.CORRECAO_DESCRICAO, solicitante);
     }
     public void iniciarAtendimento(Tecnico tecnico) {
         if (tecnico == null) {
@@ -93,6 +104,7 @@ public class Chamado {
         }
         this.tecnicoResponsavel = tecnico;
         status = Status.EM_ANDAMENTO;
+        registrarHistorico(AcaoChamado.INICIO_ATENDIMENTO, tecnico);
     }
 
     public void devolverParaFila(Tecnico tecnico){
@@ -108,6 +120,7 @@ public class Chamado {
         }
         status = Status.ABERTO;
         tecnicoResponsavel = null;
+        registrarHistorico(AcaoChamado.DEVOLUCAO_PARA_FILA, tecnico);
     }
 
     public void resolver(Tecnico tecnico) {
@@ -122,6 +135,7 @@ public class Chamado {
             );
         }
         status = Status.RESOLVIDO;
+        registrarHistorico(AcaoChamado.RESOLUCAO, tecnico);
     }
 
     public void fechar(Tecnico tecnico) {
@@ -136,5 +150,10 @@ public class Chamado {
             );
         }
         status = Status.FECHADO;
+        registrarHistorico(AcaoChamado.FECHAMENTO, tecnico);
+    }
+
+    private void registrarHistorico(AcaoChamado acao, Usuario autor) {
+        historico.add(new RegistroHistorico(acao, autor));
     }
 }
